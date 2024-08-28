@@ -11,12 +11,12 @@
 <body>
 
 
-  <?php
-      include "../app/views/layouts/head.php";
+  <?php include "../app/views/layouts/head.php";
       include "../app/views/layouts/navbar.php";
+      ?>
 
-
-  ?>
+  <?php include "../app/views/Tareas/completada.php" ?>
+  <?php include "../app/views/layouts/footer.php" ?>
 
   <script src="/node_modules/jquery/dist/jquery.min.js"></script>
   <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
