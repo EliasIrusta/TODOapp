@@ -1,0 +1,29 @@
+METODO FILTRAR
+ public function obtenerTareasFiltradas($buscar = '', $filtrar = '') {
+        $query = "SELECT * FROM tareas WHERE tarea_eliminada = 0";
+    
+        if ($filtrar === 'pendientes') {
+            $query .= " AND tarea_completada = 0";
+        } elseif ($filtrar === 'completadas') {
+            $query .= " AND tarea_completada = 1";
+        }
+    
+        if ($buscar) {
+            $query .= " AND tareas_titulo LIKE :search";
+        }
+    
+        $query .= " ORDER BY tarea_vencimiento ASC";
+    
+        $cunsulta = $this->conexion->prepare($query);
+        $cunsulta->execute([':search' => '%' . $buscar . '%']);
+        return $cunsulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+   public function index() {
+        $buscar = $_GET['buscar'] ?? '';
+        $filtrar = $_GET['filtrar'] ?? '';
+    
+        $tareas = $this->modeloTarea->obtenerTareasFiltradas($buscar, $filtrar);
+        $this->renderizar('Tareas/completada', ['tareas' => $tareas]);
+    }

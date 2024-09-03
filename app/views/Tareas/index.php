@@ -3,6 +3,8 @@
 
 <script src="https://kit.fontawesome.com/3ca9a6174a.js" crossorigin="anonymous"></script>
 
+<div class="container mt-4">
+
 <h1>Lista de Tareas</h1>
 
 <table class="table">
@@ -13,8 +15,7 @@
       <th scope="col">Descripción</th>
       <th scope="col">Fecha de Creación</th>
       <th scope="col">Fecha de Vencimiento</th>
-      <th scope="col">Completada</th>
-      <th scope="col">Eliminada</th>
+      <th scope="col">Completada</th>     
       <th scope="col">Acciones</th>
     </tr>
   </thead>
@@ -27,15 +28,22 @@
     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td> 
     <td><?php echo htmlspecialchars($tarea['tareas_creacion']); ?></td>
     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td> 
-    <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
-    <td><?php echo $tarea['tarea_eliminada'] ? 'Sí' : 'No'; ?></td>
+    <td><?php echo $tarea['tarea_completada'] ? '</i>' : 'No'; ?></td>
+  
     <td>
-        <a href="/public/edit.php?id=1" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
-        <a href="/public/delete.php?id=1" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
+        <a href="/TODOapp/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
+        <a href="/TODOapp/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
         <a href="/public/complete.php?id=1" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
     </td>
     </tr>
     <?php endforeach; ?>
    </tbody>
 </table>
+<form accion="/TODOapp/public/index.php" method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" class="form-control" name="buscar" placeholder="Buscar tareas por título" value="<?php echo htmlspecialchars($_GET['buscar'] ?? ''); ?>">
+        <button class="btn btn-primary" type="submit">Buscar</button>
+    </div>
+</form>
+</div>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

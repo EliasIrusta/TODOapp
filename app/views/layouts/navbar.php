@@ -11,23 +11,24 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php">Crear Tarea</a>
+                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=crear">Crear Tarea</a>
 
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Tareas Completadas</a>
+                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=tareasCompletadas">Tareas Completadas</a>
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Tareas Pendientes</a>
+                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=tareasPendientes">Tareas Pendientes</a>
 
                 </li>
 
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form accion="/TODOapp/public/index.php" method="get" class="d-flex" role="Buscar">
+                <input class="form-control me-2" type="text" placeholder="Buscar tareas por título" aria-label="Buscar"
+                 value="<?php echo htmlspecialchars($_GET['buscar'] ?? ''); ?>">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
         </div>
     </div>

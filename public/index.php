@@ -3,8 +3,50 @@
 require_once '../app/controllers/TareasController.php'; 
 
 $controller = new TareasController();
-$controller->listartareas(); 
+
+$accion = $_GET['accion'] ?? 'index'; 
+$id = $_GET['id'] ?? null; 
+
+switch ($accion) {
+    case 'crear':       
+        
+        break;
+    
+    case 'editar':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $controller->actualizar();  
+        } else {
+            $controller->editar($id);  
+        }
+        break;
+        case 'completar':
+            if ($id !== null) {
+                $controller->completar($id);  
+            }
+            break;        
+
+    case 'eliminar':
+        if ($id !== null) {
+            $controller->eliminar($id);  
+        }
+        break;    
+
+    case 'tareasCompletadas':
+        $controller->listarTareasPorEstado(1);  
+        break;
+
+    case 'tareasPendientes':
+        $controller->listarTareasPorEstado(0);  
+        break;            
+
+    default:
+        $controller->listartareas();  
+        break;
+}
+
 ?>
+
+
   
  
 
