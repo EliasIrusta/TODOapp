@@ -3,8 +3,8 @@
 
 <div class="container mt-4">
     <h1>Crear  Tarea</h1>
-    <form action="/TODOapp/public/index.php?accion=crear" method="post">
-        <input type="hidden" name="accion" value="crear">
+    <form action="/public/index.php?action=crear" method="post">
+        <input type="hidden" name="action" value="crear">
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>
             <input type="text" class="form-control" id="titulo" name="titulo" required>

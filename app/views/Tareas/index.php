@@ -2,8 +2,9 @@
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
 
 <script src="https://kit.fontawesome.com/3ca9a6174a.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div class="container mt-4">
+<a href="/app/views/tareas/crear.php" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
 
 <h1>Lista de Tareas</h1>
 
@@ -37,7 +38,7 @@
     </td>
     </tr>
     <?php endforeach; ?>
-   </tbody>
+  </tbody>
 </table>
 <form accion="/TODOapp/public/index.php" method="get" class="mb-4">
     <div class="input-group">
