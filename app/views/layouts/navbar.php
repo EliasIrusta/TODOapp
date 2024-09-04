@@ -16,18 +16,18 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=tareasCompletadas">Tareas Completadas</a>
+                    <a class="nav-link active" aria-current="page" href="/public/index.php?accion=tareasCompletadas">Tareas Completadas</a>
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=tareasPendientes">Tareas Pendientes</a>
+                    <a class="nav-link active" aria-current="page" href="/public/index.php?accion=tareasPendientes">Tareas Pendientes</a>
 
                 </li>
 
             </ul>
-            <form accion="/TODOapp/public/index.php" method="get" class="d-flex" role="Buscar">
+            <form accion="/public/index.php" method="get" class="d-flex" role="Buscar">
                 <input class="form-control me-2" type="text" placeholder="Buscar tareas por título" aria-label="Buscar"
-                 value="<?php echo htmlspecialchars($_GET['buscar'] ?? ''); ?>">
+                    value="<?php echo htmlspecialchars($_GET['buscar'] ?? ''); ?>">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
         </div>

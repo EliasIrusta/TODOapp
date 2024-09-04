@@ -3,7 +3,7 @@
 
 <div class="container mt-4">
     <h1>Editar Tarea</h1>
-    <form action="/TODOapp/public/index.php?accion=editar" method="post">
+    <form action="/public/index.php?accion=editar" method="post">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($tarea['tareas_id']); ?>">
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>
