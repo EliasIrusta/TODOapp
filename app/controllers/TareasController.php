@@ -16,13 +16,11 @@ class TareasController extends BaseController
     public function crear()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            //echo "Crear method called!";
-            //var_dump($_POST);
+        
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'];
             $fechaVencimiento = $_POST['fecha_vencimiento'];
-            $pendiente=true;
-            $this->modeloTarea->crearTarea($titulo, $descripcion, $fechaVencimiento, $pendiente);
+            $this->modeloTarea->crearTarea($titulo, $descripcion, $fechaVencimiento);
             header('Location: /public/index.php');
             exit;
         } else {

@@ -4,7 +4,7 @@
 <script src="https://kit.fontawesome.com/3ca9a6174a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<a href="/app/views/tareas/crear.php" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
+<a href="/public/index.php?accion=crear" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
 
 <h1>Lista de Tareas</h1>
 
@@ -29,12 +29,12 @@
         <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
         <td><?php echo htmlspecialchars($tarea['tareas_creacion']); ?></td>
         <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
-        <td><?php echo $tarea['tarea_completada'] ? '</i>' : 'No'; ?></td>
+        <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
 
         <td>
           <a href="/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
             <a href="/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-              <a href="/public/complete.php?id=1" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
+              <a href="/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
         </td>
       </tr>
     <?php endforeach; ?>

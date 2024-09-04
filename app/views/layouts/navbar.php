@@ -11,7 +11,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/public/index.php?action=crear">Crear Tarea</a>
+                    <a class="nav-link active" aria-current="page" href="/public/index.php?accion=crear">Crear Tarea</a>
 
                 </li>
 

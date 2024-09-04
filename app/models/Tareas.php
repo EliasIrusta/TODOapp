@@ -42,7 +42,7 @@ class Tarea
 
     public function obtenerTareas()
     {
-        $consulta = $this->conexion->prepare("SELECT * FROM `tareas` ");
+        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada FROM tareas");
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }       

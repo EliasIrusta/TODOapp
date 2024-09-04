@@ -9,7 +9,7 @@ $id = $_GET['id'] ?? null;
 
 switch ($accion) {
     case 'crear':       
-        
+        $controller->crear();
         break;
     
     case 'editar':
@@ -46,9 +46,4 @@ switch ($accion) {
 
 ?>
 
-
-  
- 
-
-  
 
