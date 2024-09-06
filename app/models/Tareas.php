@@ -2,7 +2,7 @@
 
 require_once '../app/config/database.php';
 
-class Tarea
+class Tarea//s
 {
     private $conexion;
 
@@ -42,16 +42,22 @@ class Tarea
 
     public function obtenerTareas()
     {
-        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada FROM tareas");
+        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada FROM tareas WHERE tarea_eliminada = false");
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }       
 
+    public function obtenerTareasTodas()
+    {
+        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas");
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }  
+
     public function obtenerTareasPorEstado($estadoCompletada) {
-        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
-        $estado = [':estado' => $estadoCompletada];
-        
+        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = false AND tarea_completada = :estado";
         $consultaBd .= " ORDER BY tarea_vencimiento ASC";
+        $estado = [':estado' => $estadoCompletada];
     
         $consulta = $this->conexion->prepare($consultaBd);
         $consulta->execute($estado);
@@ -75,11 +81,18 @@ class Tarea
     }
         
 
-    public function eliminarTarea($id) {
-        $consulta = $this->conexion->prepare("DELETE FROM tareas WHERE tareas_id = :id");
-        $consulta->execute([':id' => $id]);
+    public function eliminarTarea($id, $tareaEliminar) {
+        $consulta = $this->conexion->prepare("UPDATE  tareas SET tarea_eliminada = :tareaEliminar WHERE tareas_id = :id");
+        $consulta->execute([':tareaEliminar' => $tareaEliminar,':id' => $id]);
     }
     
+
+    public function eliminarDefinitivo($id){
+        $consulta = $this->conexion->prepare("DELETE FROM tareas WHERE tareas_id = $id");
+        $consulta->execute([':id' => $id]);
+
+    }
+
     public function obtenerTareaPorId($id) {
         $consulta = $this->conexion->prepare("SELECT * FROM tareas WHERE tareas_id = :id");
         $consulta->execute([':id' => $id]);

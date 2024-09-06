@@ -5,7 +5,7 @@
 
 <div class="container mt-4">
 
-    <h2>Tareas Pendientes</h2>
+    <h2>Historial de Tareas</h2>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -13,21 +13,23 @@
                 <th scope="col">Título</th>
                 <th scope="col">Descripción</th>
                 <th scope="col">Fecha de Vencimiento</th>
-                <th scope="col">Acciones</th>
+                <th scope="col">Completada</th>
+                <th scope="col">Borrar Definitivo</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($tareas as $tarea): ?>
 
-                <tr>
+                <tr class="<?php echo $tarea['tarea_eliminada'] ? 'text-decoration-line-through' : ''; ?>">
                     <th scope="row"><?php echo htmlspecialchars($tarea['tareas_id']); ?></th>
                     <td><?php echo htmlspecialchars($tarea['tareas_titulo']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
+                    <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
                     <td>
-                        <a href="/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
-                            <a href="/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-                                <a href="/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark"></i>
+                    
+                    <a href="/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
+                    
                     </td>
                 </tr>
 

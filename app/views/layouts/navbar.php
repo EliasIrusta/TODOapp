@@ -23,6 +23,10 @@
                     <a class="nav-link active" aria-current="page" href="/public/index.php?accion=tareasPendientes">Tareas Pendientes</a>
 
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/public/index.php?accion=historialTareas">Historial Tareas</a>
+
+                </li>
 
             </ul>
             <form accion="/public/index.php" method="get" class="d-flex" role="Buscar">

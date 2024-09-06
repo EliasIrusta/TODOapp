@@ -25,11 +25,17 @@ switch ($accion) {
             }
             break;        
 
+    case 'eliminarLogico':
+        if ($id !== null) {
+            $controller->eliminarLogico($id);  
+        }
+        break;    
+        
     case 'eliminar':
         if ($id !== null) {
             $controller->eliminar($id);  
         }
-        break;    
+        break;   
 
     case 'tareasCompletadas':
         $controller->listarTareasPorEstado(1);  
@@ -37,7 +43,11 @@ switch ($accion) {
 
     case 'tareasPendientes':
         $controller->listarTareasPorEstado(0);  
-        break;            
+        break;
+
+    case 'historialTareas':
+        $controller->listartareasTodas();  
+        break;              
 
     default:
         $controller->listartareas();  

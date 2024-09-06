@@ -13,6 +13,8 @@ class TareasController extends BaseController
     }
 
 
+//agregar validacion de fecha vencimiento
+
     public function crear()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,6 +33,11 @@ class TareasController extends BaseController
     public function listartareas() {
         $tareas = $this->modeloTarea->obtenerTareas();
         $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+    }
+
+    public function listartareasTodas() {
+        $tareas = $this->modeloTarea->obtenerTareasTodas();
+        $this->renderizar('Tareas/historial', ['tareas' => $tareas]);
     }
 
     public function listarTareasPorEstado($estado) {
@@ -64,8 +71,19 @@ class TareasController extends BaseController
 
     }    
     
+    public function eliminarLogico($id) {
+        $tarea = $this->modeloTarea->obtenerTareaPorId($id);
+        if($tarea) {
+            $tareaEliminar = $tarea['tarea_eliminada'] ? 0 : 1;
+            $this->modeloTarea->eliminarTarea($id,$tareaEliminar); 
+            header('Location: /public/index.php');
+            exit;
+            
+        }
+    }
+
     public function eliminar($id) {
-        $this->modeloTarea->eliminarTarea($id); 
+        $this->modeloTarea->eliminarDefinitivo($id); 
         header('Location: /public/index.php');
         exit;
     }
