@@ -6,7 +6,7 @@
 <div class="container mt-4">
 
     <h2>Historial de Tareas</h2>
-    <table class="table table-striped">
+    <table class="table table-striped  text-center">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -14,7 +14,8 @@
                 <th scope="col">Descripción</th>
                 <th scope="col">Fecha de Vencimiento</th>
                 <th scope="col">Completada</th>
-                <th scope="col">Borrar Definitivo</th>
+                <th scope="col">Eliminada</th>
+                <th scope="col">Borrar/Restaurar</th>
             </tr>
         </thead>
         <tbody>
@@ -26,10 +27,11 @@
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
                     <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
+                    <td><?php echo $tarea['tarea_eliminada'] ? 'Sí' : 'No'; ?></td>
                     <td>
                     
                     <a href="/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-                    
+                    <a href="/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small"><i class="fa-solid fa-trash-arrow-up"></i>
                     </td>
                 </tr>
 
