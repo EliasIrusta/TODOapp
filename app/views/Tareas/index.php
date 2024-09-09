@@ -4,7 +4,7 @@
 <script src="https://kit.fontawesome.com/3ca9a6174a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<a href="/public/index.php?accion=crear" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
+<a href="/TODOapp/public/index.php?accion=crear" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
 
 <h1>Lista de Tareas</h1>
 
@@ -32,19 +32,14 @@
         <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
 
         <td>
-          <a href="/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
-            <a href="/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-              <a href="/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
+          <a href="/TODOapp/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
+            <a href="/TODOapp/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
+              <a href="/TODOapp/public/complete.php?id=1" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
         </td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-<form accion="/public/index.php" method="get" class="mb-4">
-  <div class="input-group">
-    <input type="text" class="form-control" name="buscar" placeholder="Buscar tareas por título" value="<?php echo htmlspecialchars($_GET['buscar'] ?? ''); ?>">
-    <button class="btn btn-primary" type="submit">Buscar</button>
-  </div>
-</form>
+<?php include __DIR__ . '/../layouts/buscar.php'; ?>
 </div>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

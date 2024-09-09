@@ -25,14 +25,15 @@
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
                     <td>
-                        <a href="/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
-                            <a href="/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-                                <a href="/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark"></i>
+                        <a href="/TODOapp/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
+                            <a href="/TODOapp/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
+                                <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark"></i>
                     </td>
                 </tr>
 
             <?php endforeach; ?>
         </tbody>
     </table>
+    <?php include __DIR__ . '/../layouts/buscar.php'; ?>
 </div>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

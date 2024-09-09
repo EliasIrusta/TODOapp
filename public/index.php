@@ -9,7 +9,7 @@ $id = $_GET['id'] ?? null;
 
 switch ($accion) {
     case 'crear':       
-        $controller->crear();
+        $controller->crear();  
         break;
     
     case 'editar':
@@ -48,9 +48,14 @@ switch ($accion) {
     case 'historialTareas':
         $controller->listartareasTodas();  
         break;              
+        break;
+        
+    case 'buscar':
+        $controller->buscar();  
+        break;       
 
     default:
-        $controller->listartareas();  
+    $controller->buscar();   
         break;
 }
 
