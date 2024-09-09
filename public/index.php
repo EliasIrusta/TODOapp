@@ -55,7 +55,7 @@ switch ($accion) {
         break;       
 
     default:
-    $controller->buscar();   
+    $controller->listartareas();   
         break;
 }
 

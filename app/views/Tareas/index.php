@@ -4,6 +4,8 @@
 <script src="https://kit.fontawesome.com/3ca9a6174a.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<div class="container mt-4">
+
 <a href="/TODOapp/public/index.php?accion=crear" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
 
 <h1>Lista de Tareas</h1>
@@ -32,14 +34,28 @@
         <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
 
         <td>
-          <a href="/TODOapp/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
-            <a href="/TODOapp/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-              <a href="/TODOapp/public/complete.php?id=1" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
-        </td>
+                    <a href="/TODOapp/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                    <a href="/TODOapp/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>                   
+                    <?php if ($tarea['tarea_completada']): ?>                        
+                        <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i>
+                    <?php else: ?>
+                      <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark"></i>
+                        </a>
+                    <?php endif; ?>
+                </td>
       </tr>
     <?php endforeach; ?>
   </tbody>
 </table>
-<?php include __DIR__ . '/../layouts/buscar.php'; ?>
+<form class="d-flex" action="/TODOapp/public/index.php" method="get">
+  <input type="hidden" name="accion" value="buscar">
+  <input class="form-control me-2" type="search" name="buscar" placeholder="Buscar tarea" aria-label="Buscar">
+  <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
 </div>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>
+

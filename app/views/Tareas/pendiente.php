@@ -34,6 +34,6 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <?php include __DIR__ . '/../layouts/buscar.php'; ?>
+
 </div>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

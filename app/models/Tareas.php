@@ -11,9 +11,9 @@ class Tarea//s
         global $conexion;
         $this->conexion = $conexion;
     }
+ 
 
-    public function crearTarea($titulo, $descripcion, $fechaVencimiento)
-    {
+    public function crearTarea($titulo, $descripcion, $fechaVencimiento) {
         $consulta = $this->conexion->prepare("
         INSERT INTO tareas (tareas_titulo, tareas_descripcion, tarea_vencimiento, tareas_creacion, tarea_completada, tarea_eliminada)
         VALUES (:titulo, :descripcion, :vencimiento, NOW(), false, false)
@@ -22,11 +22,11 @@ class Tarea//s
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,
             ':vencimiento' => $fechaVencimiento
+
         ]);
     }
 
-    public function modificarTarea($id, $titulo, $descripcion, $fechaVencimiento)
-    {
+    public function modificarTarea($id, $titulo, $descripcion, $fechaVencimiento) {
         $consulta = $this->conexion->prepare("
             UPDATE tareas
             SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, tarea_vencimiento = :vencimiento
@@ -40,8 +40,7 @@ class Tarea//s
         ]);
     }
 
-    public function obtenerTareas()
-    {
+    public function obtenerTareas() {
         $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada FROM tareas WHERE tarea_eliminada = false");
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -55,7 +54,9 @@ class Tarea//s
     }  
 
     public function obtenerTareasPorEstado($estadoCompletada) {
-        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = false AND tarea_completada = :estado";
+        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
+        $estado = [':estado' => $estadoCompletada];
+           
         $consultaBd .= " ORDER BY tarea_vencimiento ASC";
         $estado = [':estado' => $estadoCompletada];
     
@@ -65,7 +66,7 @@ class Tarea//s
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function buscarTareasPorTitulo($buscar) {
+    public function buscarTareasPorTitulo($buscar = '') {
         $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 AND tareas_titulo LIKE :buscar ORDER BY tarea_vencimiento ASC";
         $buscar = [':buscar' => '%' . $buscar . '%'];
     
@@ -86,7 +87,6 @@ class Tarea//s
         $consulta->execute([':tareaEliminar' => $tareaEliminar,':id' => $id]);
     }
     
-
     public function eliminarDefinitivo($id){
         $consulta = $this->conexion->prepare("DELETE FROM tareas WHERE tareas_id = $id");
         $consulta->execute([':id' => $id]);

@@ -3,8 +3,7 @@
 require_once 'BaseController.php';
 require_once '../app/models/Tareas.php';
 
-class TareasController extends BaseController
-{
+class TareasController extends BaseController {
     private $modeloTarea;
 
     public function __construct()
@@ -15,15 +14,13 @@ class TareasController extends BaseController
 
 //agregar validacion de fecha vencimiento
 
-    public function crear()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
+      public function crear() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {         
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'];
-            $fechaVencimiento = $_POST['fecha_vencimiento'];
+            $fechaVencimiento = $_POST['fecha_vencimiento'];    
             $this->modeloTarea->crearTarea($titulo, $descripcion, $fechaVencimiento);
-            header('Location: /public/index.php');
+            header('Location: /TODOapp/public/index.php');
             exit;
         } else {
         $this->renderizar('Tareas/crear');
@@ -41,7 +38,7 @@ class TareasController extends BaseController
     }
 
     public function listarTareasPorEstado($estado) {
-
+             
         $tareas = $this->modeloTarea->obtenerTareasPorEstado($estado);
         
         if ($estado == 0) {
@@ -49,8 +46,13 @@ class TareasController extends BaseController
         } else {
             $this->renderizar('Tareas/completada', ['tareas' => $tareas]);
         }
-    }
+    } 
     
+    public function buscar() {
+        $buscar = $_GET['buscar'] ?? '';
+        $tareas = $this->modeloTarea->buscarTareasPorTitulo($buscar); 
+        $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+    }
     
     public function completar($id) {
         $tarea = $this->modeloTarea->obtenerTareaPorId($id);
@@ -61,10 +63,10 @@ class TareasController extends BaseController
             
             if ($completada) {
             
-                header('Location: /public/index.php?accion=tareasCompletadas');
+                header('Location: /TODOapp/public/index.php?accion=tareasCompletadas');
             } else {
                 
-                header('Location: /public/index.php?accion=tareasPendientes');
+                header('Location: /TODOapp/public/index.php?accion=tareasPendientes');
             }
             exit;
         }  
@@ -76,7 +78,7 @@ class TareasController extends BaseController
         if($tarea) {
             $tareaEliminar = $tarea['tarea_eliminada'] ? 0 : 1;
             $this->modeloTarea->eliminarTarea($id,$tareaEliminar); 
-            header('Location: /public/index.php');
+            header('Location: /TODOapp/public/index.php');
             exit;
             
         }
@@ -84,14 +86,15 @@ class TareasController extends BaseController
 
     public function eliminar($id) {
         $this->modeloTarea->eliminarDefinitivo($id); 
-        header('Location: /public/index.php');
+        header('Location: /TODOapp/public/index.php');
         exit;
     }
 
+    
     public function editar($id) {
         $tarea = $this->modeloTarea->obtenerTareaPorId($id);  
         if (!$tarea) {
-            header('Location: /public/index.php');  
+            header('Location: /TODOapp/public/index.php');  
             exit;
         }
 
@@ -107,11 +110,11 @@ class TareasController extends BaseController
 
             $this->modeloTarea->actualizarTarea($id, $titulo, $descripcion, $vencimiento); 
 
-            header('Location: /public/index.php');  
+            header('Location: /TODOapp/public/index.php');  
             exit;
         }
     }
-
+   
 }
 
 

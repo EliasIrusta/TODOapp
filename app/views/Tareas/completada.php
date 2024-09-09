@@ -25,7 +25,7 @@
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
                     <td>
-                        <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>
+                        <a href="/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>
                         " class="btn btn-success btn-small"><i class="fa-regular fa-square-check"></i></a>
                     </td>
                 </tr>

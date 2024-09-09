@@ -7,13 +7,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php">Mis tareas</a>
+                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php">Tareas</a>
 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=crear">Crear Tarea</a>
-
-                </li>
+                </li>                
 
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=tareasCompletadas">Tareas Completadas</a>
@@ -24,13 +20,7 @@
 
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/public/index.php?accion=historialTareas">Historial Tareas</a>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/public/index.php?accion=historialTareas">Historial Tareas</a>
-
-                </li>
+                    <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=historialTareas">Historial Tareas</a>
 
             </ul>
             <form class="d-flex" action="/TODOapp/public/index.php" method="get">
