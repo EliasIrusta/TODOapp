@@ -25,9 +25,9 @@
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
                     <td>
-                        <a href="/TODOapp/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square"></i>
-                            <a href="/TODOapp/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash"></i>
-                                <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark"></i>
+                        <a href="/public/index.php?accion=editar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-warning btn-small"><i class="fa-regular fa-pen-to-square" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Modificar Tarea"></i>
+                            <a href="/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small"><i class="fa-solid fa-trash" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Eliminar Tarea"></i>
+                                <a href="/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Marcar como Completada"></i>
                     </td>
                 </tr>
 
