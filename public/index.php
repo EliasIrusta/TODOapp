@@ -5,7 +5,7 @@ require_once '../app/controllers/TareasController.php';
 $controller = new TareasController();
 
 $accion = $_GET['accion'] ?? 'index'; 
-$id = $_GET['id'] ?? null; 
+$id = $_GET['id'] ?? null; ;         
 
 switch ($accion) {
     case 'crear':       
@@ -48,11 +48,14 @@ switch ($accion) {
     case 'historialTareas':
         $controller->listartareasTodas();  
         break;              
-        break;
-        
+                
     case 'buscar':
         $controller->buscar();  
-        break;       
+        break;
+    
+    case 'ordenar':
+       $controller->ordenar();
+       break;        
 
     default:
     $controller->listartareas();   

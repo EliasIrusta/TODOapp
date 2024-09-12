@@ -8,6 +8,12 @@
 
 <a href="/TODOapp/public/index.php?accion=crear" class="btn btn-success btn-small"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
 
+<form class="d-flex" action="/TODOapp/public/index.php" method="get">
+  <input type="hidden" name="accion" value="buscar">
+  <input class="form-control me-2" type="search" name="buscar" placeholder="Buscar tarea" aria-label="Buscar">
+  <button class="btn btn-outline-success" type="submit">Buscar</button>
+</form>
+
 <h1>Lista de Tareas</h1>
 
 <table class="table">
@@ -16,8 +22,18 @@
       <th scope="col">ID</th>
       <th scope="col">Título</th>
       <th scope="col">Descripción</th>
-      <th scope="col">Fecha de Creación</th>
-      <th scope="col">Fecha de Vencimiento</th>
+      <th scope="col">
+                <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&orden=tareas_creacion&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
+                    Fecha de Creación 
+                    <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tareas_creacion' && isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'up' : 'down'; ?>"></i>
+                </a>
+            </th>
+            <th scope="col">
+                <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&orden=tarea_vencimiento&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
+                    Fecha de Vencimiento 
+                    <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_vencimiento' && isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'up' : 'down'; ?>"></i>
+                </a>
+            </th>
       <th scope="col">Completada</th>
       <th scope="col">Acciones</th>
     </tr>
@@ -51,11 +67,6 @@
     <?php endforeach; ?>
   </tbody>
 </table>
-<form class="d-flex" action="/TODOapp/public/index.php" method="get">
-  <input type="hidden" name="accion" value="buscar">
-  <input class="form-control me-2" type="search" name="buscar" placeholder="Buscar tarea" aria-label="Buscar">
-  <button class="btn btn-outline-success" type="submit">Buscar</button>
-</form>
 </div>
 <?php include __DIR__ . '/../layouts/footer.php'; ?>
 

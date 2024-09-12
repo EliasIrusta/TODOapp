@@ -22,12 +22,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/TODOapp/public/index.php?accion=historialTareas">Historial Tareas</a>
 
-            </ul>
-            <form class="d-flex" action="/TODOapp/public/index.php" method="get">
-                <input type="hidden" name="accion" value="buscar">
-                <input class="form-control me-2" type="search" name="buscar" placeholder="Buscar tarea" aria-label="Buscar">
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
+            </ul>          
         </div>
     </div>
 </nav>

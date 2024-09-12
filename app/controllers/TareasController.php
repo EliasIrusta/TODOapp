@@ -11,7 +11,6 @@ class TareasController extends BaseController {
         $this->modeloTarea = new Tarea();
     }
 
-
 //agregar validacion de fecha vencimiento
 
       public function crear() {
@@ -53,6 +52,15 @@ class TareasController extends BaseController {
         $tareas = $this->modeloTarea->buscarTareasPorTitulo($buscar); 
         $this->renderizar('Tareas/index', ['tareas' => $tareas]);
     }
+
+    public function ordenar() {
+        $orden = $_GET['orden'] ?? ''; 
+        $direccion = $_GET['direccion'] ?? 'asc';      
+    
+        $tareas = $this->modeloTarea->ordenarTareas($orden, $direccion);
+        $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+    }
+    
     
     public function completar($id) {
         $tarea = $this->modeloTarea->obtenerTareaPorId($id);
