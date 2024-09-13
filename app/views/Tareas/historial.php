@@ -29,8 +29,8 @@
                     <td><?php echo $tarea['tarea_completada'] ? 'Sí' : 'No'; ?></td>
                     <td><?php echo $tarea['tarea_eliminada'] ? 'Sí' : 'No'; ?></td>
                     <td>                    
-                    <a href="/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Eliminar definitivamente"><i class="fa-solid fa-trash"></i>
-                    <a href="/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Restaurar la tarea"><i class="fa-solid fa-trash-arrow-up"></i>
+                    <a href="/TODOapp/public/index.php?accion=eliminar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-danger btn-small" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Eliminar definitivamente"><i class="fa-solid fa-trash"></i>
+                    <a href="/TODOapp/public/index.php?accion=eliminarLogico&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Restaurar la tarea"><i class="fa-solid fa-trash-arrow-up"></i>
                     </td>
                 </tr>
 

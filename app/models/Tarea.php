@@ -82,6 +82,21 @@ class Tarea
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function ordenarTareas($orden = 'tarea_vencimiento', $direccion = 'asc') 
+    {
+        $columnasValidas = ['tareas_creacion', 'tarea_vencimiento'];
+        $orden = in_array($orden, $columnasValidas) ? $orden : 'tarea_vencimiento';
+    
+        $direccion = ($direccion === 'desc') ? 'DESC' : 'ASC';
+    
+        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 ORDER BY $orden $direccion";
+    
+        $consulta = $this->conexion->prepare($consultaBd);
+        $consulta->execute();
+    
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    } 
+
     public function actualizarEstadoCompletada($id, $completada)
     {
         $consulta = $this->conexion->prepare("UPDATE tareas SET tarea_completada = :completada WHERE tareas_id = :id");
