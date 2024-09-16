@@ -1,8 +1,9 @@
 <?php include __DIR__ . '/../layouts/head.php'; ?>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
 
-<div class="container mt-4">
-    <h1>Editar Tarea</h1>
+<div class="container mt-4 d-flex justify-content-center">
+<div class="col-md-6">
+    <h1 class="text-center">Editar Tarea</h1>
     <form action="/TODOapp/public/index.php?accion=editar" method="post">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($tarea['tareas_id']); ?>">
         <div class="mb-3">
@@ -15,9 +16,11 @@
         </div>
         <div class="mb-3">
             <label for="vencimiento" class="form-label">Fecha de Vencimiento</label>
-            <input type="date" class="form-control" id="vencimiento" name="vencimiento" value="<?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?>" required>
+            <input type="date" class="form-control" id="tarea_vencimiento" name="tarea_vencimiento" value="<?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?>" required>
         </div>
-        <button type="submit" class="btn btn-primary" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Aceptar Cambios">Actualizar Tarea</button>
+        <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Aceptar Cambios">Actualizar Tarea</button>
+        </div>
     </form>
 </div>
 

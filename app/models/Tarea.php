@@ -12,7 +12,6 @@ class Tarea
         $this->conexion = $conexion;
     }
 
-
     public function crearTarea($titulo, $descripcion, $fechaVencimiento)
     {
         $consulta = $this->conexion->prepare("
@@ -45,7 +44,7 @@ class Tarea
 
     public function obtenerTareas()
     {
-        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada FROM tareas WHERE tarea_eliminada = false");
+        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, DATE(tarea_vencimiento) AS tarea_vencimiento , tarea_completada FROM tareas WHERE tarea_eliminada = false");
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -125,7 +124,7 @@ class Tarea
 
     public function actualizarTarea($id, $titulo, $descripcion, $vencimiento)
     {
-        $consulta = $this->conexion->prepare("UPDATE tareas SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, tarea_vencimiento = :vencimiento WHERE tareas_id = :id");
+        $consulta = $this->conexion->prepare("UPDATE tareas SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, DATE(tarea_vencimiento) AS tarea_vencimiento = :vencimiento WHERE tareas_id = :id");
         $consulta->execute([
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,

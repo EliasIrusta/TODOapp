@@ -1,9 +1,10 @@
 <?php include __DIR__ . '/../layouts/head.php'; ?>
 <?php include __DIR__ . '/../layouts/navbar.php'; ?>
 
-<div class="container mt-4">
-    <h1>Crear  Tarea</h1>
-    <form accion="/public/index.php?accion=crear" method="post">
+<div class="container mt-4 d-flex justify-content-center">
+<div class="col-md-6">
+    <h1 class="text-center">Crear  Tarea</h1>
+    <form action="/public/index.php?accion=crear" method="post">
         <input type="hidden" name="action" value="crear">
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>
@@ -13,12 +14,15 @@
             <label for="descripcion" class="form-label">Descripción</label>
             <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
         </div>
-        <div class="mb-3">
+        <div class="mb-3 ">
             <label for="vencimiento" class="form-label">Fecha de Vencimiento</label>
             <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento" required>
         </div>
-        <button type="submit" class="btn btn-primary">Guardar Tarea</button>
+        <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-block">Guardar Tarea</button>
+        </div>
     </form>
+</div>
 </div>
 
 <?php include __DIR__ . '/../layouts/footer.php'; ?>

@@ -132,7 +132,7 @@ class TareasController extends BaseController
             $id = $_POST['id'];
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'];
-            $vencimiento = $_POST['vencimiento'];
+            $vencimiento = $_POST['tarea_vencimiento'];
 
             if (!$this->validarFechaVencimiento($vencimiento)) {
                 echo "<script>alert('La fecha de vencimiento no puede ser anterior a la fecha actual.');</script>";

@@ -6,7 +6,9 @@
 
 <div class="container mt-4">
 
-  <a href="/TODOapp/public/index.php?accion=crear" class="btn btn-success btn-small" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Agregar una Tarea a la lista"><i class="fa-solid fa-plus"></i> Crear Tarea</a>
+  <a href="/TODOapp/public/index.php?accion=crear" class="btn btn-success btn-small">
+        <i class="fa-solid fa-plus"></i> Crear Tarea
+    </a>
   <br><br>
   <form class="d-flex" action="/TODOapp/public/index.php" method="get">
     <input type="hidden" name="accion" value="buscar">
