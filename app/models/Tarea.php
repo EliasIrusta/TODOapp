@@ -16,8 +16,7 @@ class Tarea
     {
         $consulta = $this->conexion->prepare("
         INSERT INTO tareas (tareas_titulo, tareas_descripcion, tarea_vencimiento, tareas_creacion, tarea_completada, tarea_eliminada)
-        VALUES (:titulo, :descripcion, :vencimiento, NOW(), false, false)
-    ");
+        VALUES (:titulo, :descripcion, :vencimiento, NOW(), false, false)");
         $consulta->execute([
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,
@@ -27,24 +26,25 @@ class Tarea
         echo "<script>alert('Tarea creada con exito!.');</script>"; 
     }
 
-    public function modificarTarea($id, $titulo, $descripcion, $fechaVencimiento)
+    public function modificarTarea($id, $titulo, $descripcion, $tareas_creacion, $fechaVencimiento)
     {
         $consulta = $this->conexion->prepare("
             UPDATE tareas
-            SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, tarea_vencimiento = :vencimiento
+            SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, tareas_creacion = :creacion, tarea_vencimiento = :vencimiento
             WHERE tareas_id = :id
         ");
         $consulta->execute([
             ':id' => $id,
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,
+            ':creacion' => $tareas_creacion,
             ':vencimiento' => $fechaVencimiento
         ]);
     }
 
     public function obtenerTareas()
     {
-        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, DATE(tarea_vencimiento) AS tarea_vencimiento , tarea_completada FROM tareas WHERE tarea_eliminada = false");
+        $consulta = $this->conexion->prepare("SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento , tarea_completada FROM tareas WHERE tarea_eliminada = false");
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -58,7 +58,7 @@ class Tarea
 
     public function obtenerTareasPorEstado($estadoCompletada)
     {
-        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
+        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
         $estado = [':estado' => $estadoCompletada];
 
         $consultaBd .= " ORDER BY tarea_vencimiento ASC";
@@ -88,7 +88,7 @@ class Tarea
     
         $direccion = ($direccion === 'desc') ? 'DESC' : 'ASC';
     
-        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 ORDER BY $orden $direccion";
+        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas WHERE tarea_eliminada = 0 ORDER BY $orden $direccion";
     
         $consulta = $this->conexion->prepare($consultaBd);
         $consulta->execute();
@@ -112,7 +112,7 @@ class Tarea
     public function eliminarDefinitivo($id)
     {
         $consulta = $this->conexion->prepare("DELETE FROM tareas WHERE tareas_id = $id");
-        $consulta->execute([':id' => $id]);
+        $consulta->execute();
     }
 
     public function obtenerTareaPorId($id)
@@ -124,7 +124,7 @@ class Tarea
 
     public function actualizarTarea($id, $titulo, $descripcion, $vencimiento)
     {
-        $consulta = $this->conexion->prepare("UPDATE tareas SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, DATE(tarea_vencimiento) AS tarea_vencimiento = :vencimiento WHERE tareas_id = :id");
+        $consulta = $this->conexion->prepare("UPDATE tareas SET tareas_titulo = :titulo, tareas_descripcion = :descripcion, tarea_vencimiento = :vencimiento WHERE tareas_id = :id");
         $consulta->execute([
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,

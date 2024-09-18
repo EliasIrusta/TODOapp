@@ -5,8 +5,11 @@
 
 <div class="container mt-4">
 
-    <h2>Tareas Completadas</h2>
-    <table class="table table-striped">
+    <h2 class="text-center">Tareas Completadas</h2>
+    <br>
+    <?php include __DIR__ . '/../layouts/buscar.php'; ?>
+    <br>
+    <table class="table table-striped text-center">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -19,7 +22,7 @@
         <tbody>
             <?php foreach ($tareas as $tarea): ?>
 
-                <tr class="text-decoration-line-through">
+                <tr>
                     <th scope="row"><?php echo htmlspecialchars($tarea['tareas_id']); ?></th>
                     <td><?php echo htmlspecialchars($tarea['tareas_titulo']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>

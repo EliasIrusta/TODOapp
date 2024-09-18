@@ -4,7 +4,7 @@
 <div class="container mt-4 d-flex justify-content-center">
 <div class="col-md-6">
     <h1 class="text-center">Crear  Tarea</h1>
-    <form action="/public/index.php?accion=crear" method="post">
+    <form action="/TODOapp/public/index.php?accion=crear" method="post">
         <input type="hidden" name="action" value="crear">
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>

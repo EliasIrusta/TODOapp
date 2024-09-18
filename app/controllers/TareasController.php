@@ -12,10 +12,18 @@ class TareasController extends BaseController
         $this->modeloTarea = new Tarea();
     }
 
-    private function validarFechaVencimiento($fechaVencimiento) 
+    private function validarFechaVencimientoCrear($fechaVencimiento) 
     {
         $fechaActual = date('Y-m-d');
         return $fechaVencimiento >= $fechaActual;
+    }
+
+    private function validarFechaVencimientoActualizar($tareas_creacion, $fechaVencimiento) 
+    {
+        $fechaCreacion = new DateTime($tareas_creacion);
+        $fechaVenc = new DateTime($fechaVencimiento);
+    
+        return $fechaVenc >= $fechaCreacion;
     }
 
     public function crear() 
@@ -25,7 +33,7 @@ class TareasController extends BaseController
             $descripcion = $_POST['descripcion'];
             $fechaVencimiento = $_POST['fecha_vencimiento'];
 
-            if (!$this->validarFechaVencimiento($fechaVencimiento)) {
+            if (!$this->validarFechaVencimientoCrear($fechaVencimiento)) {
                 echo "<script>alert('La fecha de vencimiento no puede ser anterior a la fecha actual.');</script>";
                 $this->renderizar('Tareas/crear');
                 exit;
@@ -65,8 +73,24 @@ class TareasController extends BaseController
     public function buscar() 
     {
         $buscar = $_GET['buscar'] ?? '';
+        $vista = $_GET['vista'] ?? 'index';
         $tareas = $this->modeloTarea->buscarTareasPorTitulo($buscar);
-        $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+
+
+        switch ($vista){
+            case 'tareasCompletadas':
+                $this->renderizar(('Tareas/completada'), ['tareas' => $tareas]);
+                break;
+            case 'tareasPendientes':
+                $this->renderizar(('Tareas/pendiente'), ['tareas' => $tareas]);
+                break;
+            case 'historialTareas':
+                $this->renderizar(('Tareas/historial'), ['tareas' => $tareas]);
+                break;
+            default:
+                $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+                break;
+        }
     }
 
     public function ordenar() 
@@ -132,11 +156,12 @@ class TareasController extends BaseController
             $id = $_POST['id'];
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'];
+            $creacion = $_POST['tareas_creacion'];
             $vencimiento = $_POST['tarea_vencimiento'];
 
-            if (!$this->validarFechaVencimiento($vencimiento)) {
-                echo "<script>alert('La fecha de vencimiento no puede ser anterior a la fecha actual.');</script>";
-                $this->renderizar('Tareas/crear');
+            if (!$this->validarFechaVencimientoActualizar($creacion, $vencimiento)) {
+                echo "<script>alert('La fecha de vencimiento no puede ser anterior a la fecha de creación.');</script>";
+                $this->renderizar('Tareas/editar', ['tarea' => $this->modeloTarea->obtenerTareaPorId($id)]);
                 exit;
             }
 
