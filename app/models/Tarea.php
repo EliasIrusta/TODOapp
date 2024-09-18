@@ -15,8 +15,8 @@ class Tarea
     public function crearTarea($titulo, $descripcion, $fechaVencimiento)
     {
         $consulta = $this->conexion->prepare("
-        INSERT INTO tareas (tareas_titulo, tareas_descripcion, tarea_vencimiento, tareas_creacion, tarea_completada, tarea_eliminada)
-        VALUES (:titulo, :descripcion, :vencimiento, NOW(), false, false)");
+        INSERT INTO tareas (tareas_titulo, tareas_descripcion, tarea_vencimiento, tareas_creacion, tarea_completada, tarea_eliminada, fecha_completada)
+        VALUES (:titulo, :descripcion, :vencimiento, NOW(), false, false, null)");
         $consulta->execute([
             ':titulo' => $titulo,
             ':descripcion' => $descripcion,
@@ -58,7 +58,7 @@ class Tarea
 
     public function obtenerTareasPorEstado($estadoCompletada)
     {
-        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
+        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada, fecha_completada FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
         $estado = [':estado' => $estadoCompletada];
 
         $consultaBd .= " ORDER BY tarea_vencimiento ASC";
@@ -96,11 +96,12 @@ class Tarea
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } 
 
-    public function actualizarEstadoCompletada($id, $completada)
+    public function actualizarEstadoCompletada($id, $completada, $hoy)
     {
-        $consulta = $this->conexion->prepare("UPDATE tareas SET tarea_completada = :completada WHERE tareas_id = :id");
-        $consulta->execute([':completada' => $completada, ':id' => $id]);
+        $consulta = $this->conexion->prepare("UPDATE tareas SET tarea_completada = :completada, fecha_completada = :hoy WHERE tareas_id = :id");
+        $consulta->execute([':completada' => $completada, ':hoy' => $hoy, ':id' => $id]);
     }
+    
 
 
     public function eliminarTarea($id, $tareaEliminar)

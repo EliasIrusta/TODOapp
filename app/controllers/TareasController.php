@@ -107,8 +107,17 @@ class TareasController extends BaseController
         $tarea = $this->modeloTarea->obtenerTareaPorId($id);
 
         if ($tarea) {
-            $completada = $tarea['tarea_completada'] ? 0 : 1;
-            $this->modeloTarea->actualizarEstadoCompletada($id, $completada);
+            $hoy = (new DateTime())->format('Y-m-d');
+
+            $completada = $tarea['tarea_completada'];
+            
+
+            if ($completada == 0) {
+                $this->modeloTarea->actualizarEstadoCompletada($id, 1,$hoy);
+            }else{
+                $this->modeloTarea->actualizarEstadoCompletada($id, 0, null);
+            }
+            
 
             if ($completada) {
 
