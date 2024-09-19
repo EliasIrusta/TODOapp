@@ -36,7 +36,12 @@
               <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_vencimiento' && isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
-          <th scope="col">Completada</th>
+          <th scope="col">
+          <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&orden=tarea_completada&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>&estado=<?php echo isset($_GET['estado']) ?? ''?>">
+            Completada
+            <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_completada' && isset($_GET['direccion']) && $_GET['direccion'] === 'desc') ? 'up' : 'down'; ?>"></i>
+          </a>
+        </th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>

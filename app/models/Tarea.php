@@ -81,17 +81,24 @@ class Tarea
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function ordenarTareas($orden = 'tarea_vencimiento', $direccion = 'asc') 
+    public function ordenarTareas($orden = 'tarea_vencimiento', $direccion = 'asc', $estado = true) 
     {
-        $columnasValidas = ['tareas_creacion', 'tarea_vencimiento'];
+        $columnasValidas = ['tareas_creacion', 'tarea_vencimiento', 'tarea_completada'];
         $orden = in_array($orden, $columnasValidas) ? $orden : 'tarea_vencimiento';
-    
+            
         $direccion = ($direccion === 'desc') ? 'DESC' : 'ASC';
     
-        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas WHERE tarea_eliminada = 0 ORDER BY $orden $direccion";
-    
+        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas WHERE tarea_eliminada = 0";
+
+        $consultaBd .= " ORDER BY $orden $direccion";
+        
+        $estado .= " ORDER BY tarea_completada " ;
+                 
+
         $consulta = $this->conexion->prepare($consultaBd);
-        $consulta->execute();
+                
+        $consulta->execute([':estado' => $estado]);
+      
     
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     } 

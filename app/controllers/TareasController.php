@@ -95,10 +95,12 @@ class TareasController extends BaseController
 
     public function ordenar() 
     {
-        $orden = $_GET['orden'] ?? ''; 
-        $direccion = $_GET['direccion'] ?? 'asc';      
-    
-        $tareas = $this->modeloTarea->ordenarTareas($orden, $direccion);
+        $orden = $_GET['orden'] ?? 'tarea_vencimiento'; 
+        $direccion = $_GET['direccion'] ?? 'asc';     
+        $estado = isset($_GET['estado']) && $_GET['estado'] == '0';
+
+            
+        $tareas = $this->modeloTarea->ordenarTareas($orden, $direccion, $estado);
         $this->renderizar('Tareas/index', ['tareas' => $tareas]);
     }        
     
