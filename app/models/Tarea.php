@@ -107,8 +107,6 @@ class Tarea
         $consulta->execute([':completada' => $completada, ':hoy' => $hoy, ':id' => $id]);
     }
 
-
-
     public function eliminarTarea($id, $tareaEliminar)
     {
         $consulta = $this->conexion->prepare("UPDATE  tareas SET tarea_eliminada = :tareaEliminar WHERE tareas_id = :id");
