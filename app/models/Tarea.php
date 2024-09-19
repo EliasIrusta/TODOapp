@@ -92,12 +92,11 @@ class Tarea
 
         $consultaBd .= " ORDER BY $orden $direccion";
         
-        $estado .= " ORDER BY tarea_completada " ;
-                 
+        $estado .= " ORDER BY tarea_completada " ;                 
 
         $consulta = $this->conexion->prepare($consultaBd);
                 
-        $consulta->execute([':estado' => $estado]);
+        $consulta->execute();
       
     
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
