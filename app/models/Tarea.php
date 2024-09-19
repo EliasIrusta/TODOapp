@@ -23,7 +23,7 @@ class Tarea
             ':vencimiento' => $fechaVencimiento
 
         ]);
-        echo "<script>alert('Tarea creada con exito!.');</script>"; 
+        echo "<script>alert('Tarea creada con exito!.');</script>";
     }
 
     public function modificarTarea($id, $titulo, $descripcion, $tareas_creacion, $fechaVencimiento)
@@ -81,34 +81,32 @@ class Tarea
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function ordenarTareas($orden = 'tarea_vencimiento', $direccion = 'asc', $estado = true) 
+    public function ordenarTareas($orden = 'tarea_vencimiento', $direccion = 'asc', $estado = true)
     {
         $columnasValidas = ['tareas_creacion', 'tarea_vencimiento', 'tarea_completada'];
         $orden = in_array($orden, $columnasValidas) ? $orden : 'tarea_vencimiento';
-            
+
         $direccion = ($direccion === 'desc') ? 'DESC' : 'ASC';
-    
+
         $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada FROM tareas WHERE tarea_eliminada = 0";
 
         $consultaBd .= " ORDER BY $orden $direccion";
-        
-        $estado .= " ORDER BY tarea_completada " ;
-                 
+
+        $estado .= " ORDER BY tarea_completada ";
 
         $consulta = $this->conexion->prepare($consultaBd);
-                
-        $consulta->execute([':estado' => $estado]);
-      
-    
+
+        $consulta->execute();
+
         return $consulta->fetchAll(PDO::FETCH_ASSOC);
-    } 
+    }
 
     public function actualizarEstadoCompletada($id, $completada, $hoy)
     {
         $consulta = $this->conexion->prepare("UPDATE tareas SET tarea_completada = :completada, fecha_completada = :hoy WHERE tareas_id = :id");
         $consulta->execute([':completada' => $completada, ':hoy' => $hoy, ':id' => $id]);
     }
-    
+
 
 
     public function eliminarTarea($id, $tareaEliminar)

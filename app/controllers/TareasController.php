@@ -35,7 +35,11 @@ class TareasController extends BaseController
 
             if (!$this->validarFechaVencimientoCrear($fechaVencimiento)) {
                 echo "<script>alert('La fecha de vencimiento no puede ser anterior a la fecha actual.');</script>";
-                $this->renderizar('Tareas/crear');
+                $this->renderizar('Tareas/crear', [
+                    'titulo' => $titulo,
+                    'descripcion' => $descripcion,
+                    'fecha_vencimiento' => $fechaVencimiento
+                ]);
                 exit;
             }
 
@@ -152,7 +156,7 @@ class TareasController extends BaseController
     public function eliminar($id)
     {
         $this->modeloTarea->eliminarDefinitivo($id);
-        header('Location: /TODOapp/public/index.php');
+        header('Location: /TODOapp/public/index.php?accion=historialTareas');
         exit;
     }
 
