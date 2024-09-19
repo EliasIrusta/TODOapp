@@ -3,30 +3,32 @@
 require_once 'BaseController.php';
 require_once '../app/models/Tarea.php';
 
-class TareasController extends BaseController 
+class TareasController extends BaseController
 {
     private $modeloTarea;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->modeloTarea = new Tarea();
     }
 
-    private function validarFechaVencimientoCrear($fechaVencimiento) 
+    private function validarFechaVencimientoCrear($fechaVencimiento)
     {
         $fechaActual = date('Y-m-d');
         return $fechaVencimiento >= $fechaActual;
     }
 
-    private function validarFechaVencimientoActualizar($tareas_creacion, $fechaVencimiento) 
+    private function validarFechaVencimientoActualizar($tareas_creacion, $fechaVencimiento)
     {
         $fechaCreacion = new DateTime($tareas_creacion);
         $fechaVenc = new DateTime($fechaVencimiento);
-    
+        //fecha de creacion = 16sep 
+        //fecha de hoy = 19sep
+        //fecha de vencimiento = 17sep 
         return $fechaVenc >= $fechaCreacion;
     }
 
-    public function crear() 
+    public function crear()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $titulo = $_POST['titulo'];
@@ -51,19 +53,19 @@ class TareasController extends BaseController
         }
     }
 
-    public function listartareas() 
+    public function listartareas()
     {
         $tareas = $this->modeloTarea->obtenerTareas();
         $this->renderizar('Tareas/index', ['tareas' => $tareas]);
     }
 
-    public function listartareasTodas() 
+    public function listartareasTodas()
     {
         $tareas = $this->modeloTarea->obtenerTareasTodas();
         $this->renderizar('Tareas/historial', ['tareas' => $tareas]);
     }
 
-    public function listarTareasPorEstado($estado) 
+    public function listarTareasPorEstado($estado)
     {
         $tareas = $this->modeloTarea->obtenerTareasPorEstado($estado);
 
@@ -74,14 +76,14 @@ class TareasController extends BaseController
         }
     }
 
-    public function buscar() 
+    public function buscar()
     {
         $buscar = $_GET['buscar'] ?? '';
         $vista = $_GET['vista'] ?? 'index';
         $tareas = $this->modeloTarea->buscarTareasPorTitulo($buscar);
 
 
-        switch ($vista){
+        switch ($vista) {
             case 'tareasCompletadas':
                 $this->renderizar(('Tareas/completada'), ['tareas' => $tareas]);
                 break;
@@ -97,52 +99,45 @@ class TareasController extends BaseController
         }
     }
 
-    public function ordenar() 
+    public function ordenar()
     {
-        $orden = $_GET['orden'] ?? 'tarea_vencimiento'; 
-        $direccion = $_GET['direccion'] ?? 'asc';     
+        $orden = $_GET['orden'] ?? 'tarea_vencimiento';
+        $direccion = $_GET['direccion'] ?? 'asc';
         $estado = isset($_GET['estado']) && $_GET['estado'] == '0';
 
-            
+
         $tareas = $this->modeloTarea->ordenarTareas($orden, $direccion, $estado);
-        $vista = $_GET['vista'] ?? 'index'; 
-    
+        $vista = $_GET['vista'] ?? 'index';
+
         if ($vista === 'historial') {
             $this->renderizar('Tareas/historial', ['tareas' => $tareas]);
         } else {
             $this->renderizar('Tareas/index', ['tareas' => $tareas]);
         }
-    }        
-    
-    public function completar($id) 
-    {
-        $tarea = $this->modeloTarea->obtenerTareaPorId($id);
-
-        if ($tarea) {
-            $hoy = (new DateTime())->format('Y-m-d');
-
-            $completada = $tarea['tarea_completada'];
-            
-
-            if ($completada == 0) {
-                $this->modeloTarea->actualizarEstadoCompletada($id, 1,$hoy);
-            }else{
-                $this->modeloTarea->actualizarEstadoCompletada($id, 0, null);
-            }
-            
-
-            if ($completada) {
-
-                header('Location: /TODOapp/public/index.php?accion=tareasCompletadas');
-            } else {
-
-                header('Location: /TODOapp/public/index.php?accion=tareasPendientes');
-            }
-            exit;
-        }
     }
 
-    public function eliminarLogico($id) 
+    public function completar($id)
+    {
+        $tarea = $this->modeloTarea->obtenerTareaPorId($id);
+        if (empty($tarea)) {
+            return;
+        }
+
+        $hoy = (new DateTime())->format('Y-m-d');
+
+        $completada = $tarea['tarea_completada'];
+
+        if ($completada == 0) {
+            $this->modeloTarea->actualizarEstadoCompletada($id, 1, $hoy);
+            header('Location: /TODOapp/public/index.php?accion=tareasCompletadas');
+        } else {
+            $this->modeloTarea->actualizarEstadoCompletada($id, 0, null);
+            header('Location: /TODOapp/public/index.php?accion=tareasPendientes');
+        }
+        exit;
+    }
+
+    public function eliminarLogico($id)
     {
         $tarea = $this->modeloTarea->obtenerTareaPorId($id);
         if ($tarea) {
@@ -193,6 +188,3 @@ class TareasController extends BaseController
         }
     }
 }
-
-
-?>
