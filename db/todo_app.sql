@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 26-08-2024 a las 15:23:12
+-- Tiempo de generación: 19-09-2024 a las 11:20:49
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.2.21
 
@@ -32,9 +32,10 @@ CREATE TABLE `tareas` (
   `tareas_titulo` varchar(50) NOT NULL,
   `tareas_descripcion` varchar(100) DEFAULT NULL,
   `tareas_creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `tarea_vencimiento` datetime NOT NULL,
+  `tarea_vencimiento` date NOT NULL,
   `tarea_completada` tinyint(1) DEFAULT NULL,
-  `tarea_eliminada` tinyint(1) DEFAULT NULL
+  `tarea_eliminada` tinyint(1) DEFAULT NULL,
+  `fecha_completada` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
