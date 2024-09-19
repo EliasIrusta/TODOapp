@@ -101,7 +101,13 @@ class TareasController extends BaseController
 
             
         $tareas = $this->modeloTarea->ordenarTareas($orden, $direccion, $estado);
-        $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+        $vista = $_GET['vista'] ?? 'index'; 
+    
+        if ($vista === 'historial') {
+            $this->renderizar('Tareas/historial', ['tareas' => $tareas]);
+        } else {
+            $this->renderizar('Tareas/index', ['tareas' => $tareas]);
+        }
     }        
     
     public function completar($id) 

@@ -29,11 +29,11 @@
                     <td><?php echo htmlspecialchars($tarea['tareas_titulo']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tareas_descripcion']); ?></td>
                     <td><?php echo htmlspecialchars($tarea['tarea_vencimiento']); ?></td>
-                    <td><?php echo htmlspecialchars($tarea['fecha_completada']); ?></td>
+                    <td><?php echo htmlspecialchars($tarea['tarea_completada']); ?></td>
                     <td>
                         <?php
                         $fechaCreacion = new DateTime($tarea['tareas_creacion']);
-                        $fechaCompletada = new DateTime($tarea['fecha_completada']);                       
+                        $fechaCompletada = new DateTime($tarea['tarea_completada']);                       
                         $diferencia = $fechaCreacion->diff($fechaCompletada);                       
                         echo htmlspecialchars($diferencia->days) . " días";
                         ?>

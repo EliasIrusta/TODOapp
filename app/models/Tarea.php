@@ -58,7 +58,7 @@ class Tarea
 
     public function obtenerTareasPorEstado($estadoCompletada)
     {
-        $consultaBd = "SELECT tareas_id, tareas_titulo, tareas_descripcion, DATE(tareas_creacion) AS tareas_creacion, tarea_vencimiento, tarea_completada, tarea_eliminada, fecha_completada FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
+        $consultaBd = "SELECT * FROM tareas WHERE tarea_eliminada = 0 AND tarea_completada = :estado";
         $estado = [':estado' => $estadoCompletada];
 
         $consultaBd .= " ORDER BY tarea_vencimiento ASC";

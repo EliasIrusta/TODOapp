@@ -15,8 +15,18 @@
                 <th scope="col">ID</th>
                 <th scope="col">Título</th>
                 <th scope="col">Descripción</th>
-                <th scope="col">Fecha de Vencimiento</th>
-                <th scope="col">Completada</th>
+                <th scope="col">
+            <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&vista=historial&orden=tarea_vencimiento&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
+              Fecha de Vencimiento
+              <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_vencimiento' && isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'up' : 'down'; ?>"></i>
+            </a>
+          </th>
+          <th scope="col">
+          <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&vista=historial&orden=tarea_completada&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>&estado=<?php echo isset($_GET['estado']) ?? ''?>">
+            Completada
+            <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_completada' && isset($_GET['direccion']) && $_GET['direccion'] === 'desc') ? 'up' : 'down'; ?>"></i>
+          </a>
+        </th>
                 <th scope="col">Eliminada</th>
                 <th scope="col">Borrar/Restaurar</th>
             </tr>

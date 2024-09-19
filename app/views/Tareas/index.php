@@ -25,19 +25,19 @@
           <th scope="col">Título</th>
           <th scope="col">Descripción</th>
           <th scope="col">
-            <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&orden=tareas_creacion&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
+            <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&vista=index&orden=tareas_creacion&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
               Fecha de Creación
               <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tareas_creacion' && isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
           <th scope="col">
-            <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&orden=tarea_vencimiento&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
+            <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&vista=index&orden=tarea_vencimiento&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>">
               Fecha de Vencimiento
               <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_vencimiento' && isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'up' : 'down'; ?>"></i>
             </a>
           </th>
           <th scope="col">
-          <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&orden=tarea_completada&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>&estado=<?php echo isset($_GET['estado']) ?? ''?>">
+          <a class="nav-link active" href="/TODOapp/public/index.php?accion=ordenar&vista=index&orden=tarea_completada&direccion=<?php echo (isset($_GET['direccion']) && $_GET['direccion'] === 'asc') ? 'desc' : 'asc'; ?>&estado=<?php echo isset($_GET['estado']) ?? ''?>">
             Completada
             <i class="fa-solid fa-arrow-<?php echo (isset($_GET['orden']) && $_GET['orden'] === 'tarea_completada' && isset($_GET['direccion']) && $_GET['direccion'] === 'desc') ? 'up' : 'down'; ?>"></i>
           </a>
@@ -72,7 +72,7 @@
               <?php if ($tarea['tarea_completada']): ?>
                 <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-success btn-small"><i class="fa-regular fa-square-check" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Marcar como NO Completada"></i>
                 <?php else: ?>
-                  <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-solid fa-xmark" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Marcar como Completada"></i>
+                  <a href="/TODOapp/public/index.php?accion=completar&id=<?php echo $tarea['tareas_id']; ?>" class="btn btn-secondary btn-small"><i class="fa-xmark" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Marcar como Completada"></i>
                   </a>
                 <?php endif; ?>
             </td>
